@@ -1,0 +1,424 @@
+        /* RESET E CONFIGURAÇÕES GLOBAIS */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+            background: #eef2f7;
+            min-height: 100vh;
+            display: flex;
+        }
+
+        /* TELA CHEIA */
+        .app-wrapper {
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            background: white;
+            overflow: hidden;
+        }
+
+        /* ===== SIDEBAR ===== */
+        .sidebar {
+            width: 280px;
+            background: #1a2639;
+            padding: 40px 25px;
+            display: flex;
+            flex-direction: column;
+            color: white;
+            height: 100vh;
+            position: sticky;
+            top: 0;
+            box-shadow: 4px 0 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .logo-area {
+            margin-bottom: 60px;
+            padding-left: 5px;
+        }
+
+        .logo-area h1 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .logo-area h1 span {
+            color: #5f8bff;
+            display: block;
+            font-size: 1.1rem;
+            font-weight: 400;
+            letter-spacing: 3px;
+            margin-top: 8px;
+            text-transform: uppercase;
+        }
+
+        .menu-side {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            flex: 1;
+        }
+
+        .menu-item-side {
+            padding: 16px 22px;
+            border-radius: 18px;
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .menu-item-side a {
+            color: #b0c0d4;
+            text-decoration: none;
+            display: block;
+            width: 100%;
+        }
+
+        .menu-item-side:hover {
+            background: #2f3b54;
+        }
+
+        .menu-item-side:hover a {
+            color: #e0e8ff;
+        }
+
+        .menu-item-side.active {
+            background: #2f3b54;
+        }
+
+        .menu-item-side.active a {
+            color: white;
+            font-weight: 600;
+        }
+
+        .menu-item-side:last-child {
+            margin-top: auto;
+            color: #ffa7a7;
+            cursor: pointer;
+        }
+
+        .menu-item-side:last-child:hover {
+            background: #3f2f3f;
+            color: #ffcaca;
+        }
+
+        /* ===== CONTEÚDO PRINCIPAL ===== */
+        .main-content {
+            flex: 1;
+            background: #f8fafd;
+            padding: 35px 45px;
+            overflow-y: auto;
+            height: 100vh;
+        }
+
+        /* Cabeçalho */
+        .content-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .content-header h2 {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: #121f35;
+            letter-spacing: -0.02em;
+        }
+
+        /* Barra de pesquisa */
+        .search-section {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+        }
+
+        .search-container {
+            background: white;
+            border: 1px solid #e1e8f0;
+            border-radius: 60px;
+            padding: 8px 8px 8px 25px;
+            display: flex;
+            align-items: center;
+            width: 350px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.02);
+        }
+
+        .search-container span {
+            color: #8c9cb0;
+            margin-right: 10px;
+            font-size: 1.3rem;
+        }
+
+        .search-container input {
+            border: none;
+            background: transparent;
+            padding: 14px 0;
+            font-size: 1rem;
+            width: 100%;
+            outline: none;
+            color: #2d3f5e;
+        }
+
+        .search-container input::placeholder {
+            color: #aebecd;
+        }
+
+        .btn-add {
+            background: #3b7cff;
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 60px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 10px 20px -8px #2a5ed9;
+            cursor: pointer;
+            white-space: nowrap;
+            border: 1px solid #2a6be0;
+            transition: background 0.2s;
+        }
+
+        .btn-add:hover {
+            background: #2563eb;
+        }
+
+        .btn-add span {
+            font-size: 1.5rem;
+            font-weight: 500;
+        }
+
+        /* Título da seção de produtos */
+        .template-title {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 30px 0 20px;
+        }
+
+        .template-title h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: #2d3f5e;
+        }
+
+        /* Grid de produtos */
+        .templates-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+            margin-top: 15px;
+        }
+
+        /* Card de produto */
+        .template-card {
+            background: white;
+            border-radius: 28px;
+            padding: 28px 32px;
+            display: flex;
+            align-items: flex-start;
+            gap: 30px;
+            border: 1px solid #e9eff8;
+            box-shadow: 0 8px 20px rgba(0, 30, 60, 0.05);
+            transition: all 0.2s;
+        }
+
+        .template-card:hover {
+            border-color: #cbd6e6;
+            box-shadow: 0 15px 30px -12px #1f3a6b30;
+        }
+
+        /* Campo de imagem */
+        .product-image {
+            width: 110px;
+            height: 110px;
+            background: #f5f9ff;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px dashed #a0bde0;
+            color: #4a6fa5;
+            font-size: 0.9rem;
+            font-weight: 500;
+            text-align: center;
+            padding: 10px;
+            flex-shrink: 0;
+        }
+
+        .product-image span {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .product-image span::before {
+            content: "🖼️";
+            font-size: 2.2rem;
+            margin-bottom: 4px;
+        }
+
+        /* Área de informações */
+        .template-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        /* Campos do template */
+        .template-field {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+
+        .field-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #5f7d9c;
+            letter-spacing: 0.3px;
+            text-transform: uppercase;
+        }
+
+        .field-placeholder {
+            background: #f2f7ff;
+            border: 1px solid #e1ebfa;
+            border-radius: 14px;
+            padding: 14px 18px;
+            color: #2d4a77;
+            font-size: 1rem;
+        }
+
+        .field-placeholder span {
+            color: #8aa9d0;
+            font-style: italic;
+        }
+
+        /* Linha de duas colunas */
+        .row-fields {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .row-fields .template-field {
+            flex: 1;
+            min-width: 200px;
+        }
+
+        /* Ações */
+        .template-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            margin-left: 10px;
+            flex-shrink: 0;
+        }
+
+        .btn-action {
+            background: white;
+            border: 1px solid #dee7f2;
+            padding: 12px 28px;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 1rem;
+            color: #2c3f5c;
+            cursor: pointer;
+            transition: 0.1s;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-action.edit {
+            background: #f2f7ff;
+            border-color: #bed4ff;
+            color: #1f5090;
+        }
+
+        .btn-action.delete {
+            background: #fff7f7;
+            border-color: #ffcece;
+            color: #b13e3e;
+        }
+
+        .btn-action.edit:hover {
+            background: #e5efff;
+        }
+
+        .btn-action.delete:hover {
+            background: #ffe5e5;
+        }
+
+        /* Scrollbar */
+        .main-content::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        .main-content::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+
+        .main-content::-webkit-scrollbar-thumb {
+            background: #c1c9d6;
+            border-radius: 10px;
+        }
+
+        .main-content::-webkit-scrollbar-thumb:hover {
+            background: #9aabbf;
+        }
+
+        /* Responsividade */
+        @media (max-width: 1000px) {
+            .template-card {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .template-actions {
+                margin-left: 0;
+                justify-content: flex-end;
+            }
+        }
+
+        @media (max-width: 900px) {
+            .app-wrapper {
+                flex-direction: column;
+            }
+            
+            .sidebar {
+                width: 100%;
+                height: auto;
+                position: relative;
+                padding: 20px;
+            }
+            
+            .menu-side {
+                flex-direction: row;
+                flex-wrap: wrap;
+            }
+            
+            .menu-item-side:last-child {
+                margin-top: 0;
+            }
+        }
+
+        @media (max-width: 1200px) {
+            .sidebar {
+                width: 240px;
+                padding: 30px 15px;
+            }
+        }
+    
