@@ -1,18 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Malharia System · Template de Produto</title>
     <link rel="stylesheet" href="TelaEstoque.css" />
-    
+
 </head>
+
 <body>
     <div class="app-wrapper">
         <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="logo-area">
-                <h1>Malharia<br><span>SYSTEM</span></h1>
+
+                <img src="LOGO-ILKA-REBLIN-TRANSPARENTE.png" alt="Ilka Reblin Logo">
+
             </div>
             <div class="menu-side">
                 <div class="menu-item-side"><a href="TelaEstoque.php">Estoque</a></div>
@@ -26,7 +30,7 @@
         <div class="main-content">
             <div class="content-header">
                 <h2>Controle de Estoque</h2>
-                
+
                 <div class="search-section">
                     <div class="search-container">
                         <span>🔍</span>
@@ -103,13 +107,14 @@
     <script>
         const searchField = document.querySelector('.search-container input');
         if (searchField) {
-            searchField.addEventListener('focus', function() {
+            searchField.addEventListener('focus', function () {
                 if (this.value === 'Pesquisar produtos...') this.value = '';
             });
-            searchField.addEventListener('blur', function() {
+            searchField.addEventListener('blur', function () {
                 if (this.value.trim() === '') this.value = 'Pesquisar produtos...';
             });
         }
     </script>
 </body>
+
 </html>
