@@ -26,28 +26,7 @@
 
         <!-- CONTEÚDO PRINCIPAL - TELA DE AVISOS DE ESTOQUE -->
         <div class="main-content">
-            <div class="content-header">
-                <h2>Avisos de Estoque</h2>
-               
-            </div>
-
-            <!-- Estatísticas rápidas -->
-            <div class="stats-container">
-                <div class="stat-card">
-                    <div class="stat-icon"></div>
-                    <div class="stat-info">
-                        <h4>Avisos ativos</h4>
-                        <p>1 <span>estoque baixo</span></p>
-                    </div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-icon"></div>
-                    <div class="stat-info">
-                        <h4>Produtos críticos</h4>
-                        <p>1 <span>abaixo do mínimo</span></p>
-                    </div>
-                </div>
-            </div>
+            
 
             <!-- Título da seção -->
             <div class="avisos-title">

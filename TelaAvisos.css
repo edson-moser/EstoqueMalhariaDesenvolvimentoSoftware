@@ -147,10 +147,6 @@ body {
     gap: 10px;
 }
 
-.content-header h2::before {
-    content: "🔔";
-    font-size: 2rem;
-}
 
 /* Barra de pesquisa */
 .search-section {
@@ -360,7 +356,6 @@ body {
 }
 
 .qty-badge::before {
-    content: "⚠️";
     font-size: 1rem;
     color: #E86A92; /* Rosa principal */
 }
@@ -390,7 +385,7 @@ body {
 }
 
 .aviso-data::before {
-    content: "🕐";
+    
     font-size: 1rem;
     color: #E86A92; /* Rosa principal */
 }
