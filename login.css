@@ -1,0 +1,221 @@
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@400;700&family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #F5F2F7;
+}
+
+/* CENTRALIZAÇÃO */
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+/* CARD */
+.content {
+    display: flex;
+    width: 900px;
+    height: 550px;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(106, 44, 112, 0.2);
+    position: relative;
+}
+
+/* FUNDO ROXO */
+.content::before {
+    content: "";
+    position: absolute;
+    width: 40%;
+    height: 100%;
+    background: linear-gradient(135deg, #d49ed5,#ba73bc, #8E3A8F,#6A2C70);
+    top: 0;
+    left: 0;
+}
+
+/* COLUNAS */
+.first-column,
+.second-column {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ESQUERDA */
+.first-column {
+    width: 40%;
+    z-index: 2;
+    text-align: center;
+    color: #fff;
+    padding: 40px 20px;
+}
+
+/* DIREITA */
+.second-column {
+    width: 60%;
+    background: #FAFAFA;
+    z-index: 2;
+    padding: 40px;
+}
+
+/* LOGO */
+.logo {
+    width: 250px;
+    margin-bottom: 25px;
+}
+
+/* TEXTOS */
+.title {
+    font-size: 26px;
+    font-family: 'Alegreya Sans SC', sans-serif;
+    font-weight: bold;
+}
+
+.title-primary {
+    color: #fff;
+}
+
+.title-second {
+    color: #6A2C70;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.description-primary {
+    color: #F6A5C0;
+}
+
+.description-second {
+    color: #555;
+    margin-bottom: 20px;
+}
+
+/* FORM */
+.form {
+    width: 80%;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* INPUT */
+.label-input {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #DDD;
+    border-radius: 8px;
+    padding: 12px;
+    margin-bottom: 15px;
+    transition: 0.3s;
+}
+
+.label-input:hover {
+    border-color: #E86A92;
+}
+
+.label-input:focus-within {
+    border-color: #E86A92;
+    box-shadow: 0 0 0 3px rgba(232, 106, 146, 0.1);
+}
+
+.label-input i {
+    margin-right: 10px;
+    color: #D85A85;
+}
+
+.label-input input {
+    border: none;
+    outline: none;
+    width: 100%;
+    font-size: 15px;
+}
+
+/* LINK */
+.password {
+    text-align: center;
+    margin: 10px 0;
+    font-size: 13px;
+    color: #777;
+    text-decoration: none;
+}
+
+.password:hover {
+    color: #6A2C70;
+}
+
+/* BOTÕES */
+.btn {
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    width: 70%;
+    border: none;
+    transition: 0.3s;
+    margin-top: 10px;
+}
+
+/* BOTÃO ESQUERDA */
+.btn-primary {
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.btn-primary:hover {
+    background: #fff;
+    color: #6A2C70;
+}
+
+/* BOTÃO LOGIN */
+.btn-second {
+    background: linear-gradient(135deg, #E86A92, #D85A85);
+    color: #fff;
+    font-size: 14px;
+    display: block;
+    margin: 10px auto;
+}
+
+
+.btn-second:hover {
+    background: linear-gradient(135deg, #F6A5C0, #E86A92);
+}
+
+/* RESPONSIVO */
+@media (max-width: 900px) {
+
+    .content {
+        flex-direction: column;
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+    }
+
+    .content::before {
+        width: 100%;
+        height: 40%;
+    }
+
+    .first-column,
+    .second-column {
+        width: 100%;
+    }
+
+    .form {
+        width: 90%;
+    }
+}

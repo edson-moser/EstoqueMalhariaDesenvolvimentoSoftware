@@ -22,7 +22,7 @@
                 <div class="menu-item-side"><a href="TelaEstoque.php">Estoque</a></div>
                 <div class="menu-item-side"><a href="TelaAvisos.php">Avisos</a></div>
                 <div class="menu-item-side"><a href="">Histórico</a></div>
-                <div class="menu-item-side">Sair</div>
+                <div class="menu-item-side"><a href="logout.php">Sair</a></div>
                 
             </div>
         </div>
