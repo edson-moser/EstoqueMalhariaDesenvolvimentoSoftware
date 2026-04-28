@@ -1,4 +1,3 @@
-/* RESET E CONFIGURAÇÕES GLOBAIS */
 * {
     margin: 0;
     padding: 0;
@@ -7,32 +6,30 @@
 }
 
 body {
-    background: #FFF7FB; /* Fundo claro principal */
+    background: #FFF7FB;
     min-height: 100vh;
     display: flex;
 }
 
-/* TELA CHEIA */
 .app-wrapper {
     display: flex;
     width: 100vw;
     height: 100vh;
-    background: #FFF7FB; /* Fundo claro principal */
+    background: #FFF7FB;
     overflow: hidden;
 }
 
-/* ===== SIDEBAR ===== */
 .sidebar {
     width: 280px;
-    background: #FFFFFF; /* Branco puro */
+    background: #FFFFFF;
     padding: 40px 25px;
     display: flex;
     flex-direction: column;
-    color: #4A4A4A; /* Cinza texto */
+    color: #4A4A4A;
     height: 100vh;
     position: sticky;
     top: 0;
-    box-shadow: 4px 0 15px rgba(106, 44, 112, 0.1); /* Roxo com transparência */
+    box-shadow: 4px 0 15px rgba(106, 44, 112, 0.1);
 }
 
 .logo-area {
@@ -53,11 +50,11 @@ body {
     font-weight: 700;
     letter-spacing: -0.5px;
     line-height: 1.2;
-    color: #6A2C70; /* Roxo principal */
+    color: #6A2C70;
 }
 
 .logo-area h1 span {
-    color: #E86A92; /* Rosa principal */
+    color: #E86A92;
     display: block;
     font-size: 1.1rem;
     font-weight: 400;
@@ -80,54 +77,52 @@ body {
     font-size: 1.1rem;
     transition: all 0.2s;
     cursor: pointer;
-    color: #4A4A4A; /* Cinza texto */
+    color: #4A4A4A;
 }
 
 .menu-item-side a {
-    color: #4A4A4A; /* Cinza texto */
+    color: #4A4A4A;
     text-decoration: none;
     display: block;
     width: 100%;
 }
 
 .menu-item-side:hover {
-    background: #F6A5C0; /* Rosa claro */
+    background: #F6A5C0;
 }
 
 .menu-item-side:hover a {
-    color: #6A2C70; /* Roxo principal */
+    color: #6A2C70;
 }
 
 .menu-item-side.active {
-    background: #F6A5C0; /* Rosa claro */
+    background: #F6A5C0;
 }
 
 .menu-item-side.active a {
-    color: #6A2C70; /* Roxo principal */
+    color: #6A2C70;
     font-weight: 600;
 }
 
 .menu-item-side:last-child {
     margin-top: auto;
-    color: #E86A92; /* Rosa principal */
+    color: #E86A92;
     cursor: pointer;
 }
 
 .menu-item-side:last-child:hover {
-    background: #F6A5C0; /* Rosa claro */
-    color: #6A2C70; /* Roxo principal */
+    background: #F6A5C0;
+    color: #6A2C70;
 }
 
-/* ===== CONTEÚDO PRINCIPAL ===== */
 .main-content {
     flex: 1;
-    background: #FFF7FB; /* Fundo claro principal */
+    background: #FFF7FB;
     padding: 35px 45px;
     overflow-y: auto;
     height: 100vh;
 }
 
-/* Cabeçalho */
 .content-header {
     display: flex;
     justify-content: space-between;
@@ -140,11 +135,10 @@ body {
 .content-header h2 {
     font-size: 2.2rem;
     font-weight: 700;
-    color: #6A2C70; /* Roxo principal */
+    color: #6A2C70;
     letter-spacing: -0.02em;
 }
 
-/* Barra de pesquisa */
 .search-section {
     display: flex;
     align-items: center;
@@ -153,18 +147,18 @@ body {
 }
 
 .search-container {
-    background: #FFFFFF; /* Branco puro */
-    border: 1px solid #EAEAEA; /* Cinza claro */
+    background: #FFFFFF;
+    border: 1px solid #EAEAEA;
     border-radius: 60px;
     padding: 8px 8px 8px 25px;
     display: flex;
     align-items: center;
     width: 350px;
-    box-shadow: 0 4px 12px rgba(106, 44, 112, 0.05); /* Roxo com transparência */
+    box-shadow: 0 4px 12px rgba(106, 44, 112, 0.05);
 }
 
 .search-container span {
-    color: #E86A92; /* Rosa principal */
+    color: #E86A92;
     margin-right: 10px;
     font-size: 1.3rem;
 }
@@ -176,16 +170,16 @@ body {
     font-size: 1rem;
     width: 100%;
     outline: none;
-    color: #4A4A4A; /* Cinza texto */
+    color: #4A4A4A;
 }
 
 .search-container input::placeholder {
-    color: #F6A5C0; /* Rosa claro */
+    color: #F6A5C0;
 }
 
 .btn-add {
-    background: #E86A92; /* Rosa principal */
-    color: #FFFFFF; /* Branco puro */
+    background: #E86A92;
+    color: #FFFFFF;
     border: none;
     padding: 14px 32px;
     border-radius: 60px;
@@ -194,20 +188,21 @@ body {
     display: flex;
     align-items: center;
     gap: 8px;
-    box-shadow: 0 10px 20px -8px #E86A92; /* Rosa principal com transparência */
+    box-shadow: 0 10px 20px -8px #E86A92;
     cursor: pointer;
     white-space: nowrap;
-    border: 1px solid #E86A92; /* Rosa principal */
+    border: 1px solid #E86A92;
     transition: background 0.2s;
-    
 }
+
 a {
     text-decoration: none;
 }
+
 .btn-add:hover {
-    background: #F6A5C0; /* Rosa claro */
-    border-color: #F6A5C0; /* Rosa claro */
-    color: #6A2C70; /* Roxo principal */
+    background: #F6A5C0;
+    border-color: #F6A5C0;
+    color: #6A2C70;
 }
 
 .btn-add span {
@@ -215,7 +210,6 @@ a {
     font-weight: 500;
 }
 
-/* Título da seção de produtos */
 .template-title {
     display: flex;
     align-items: center;
@@ -226,10 +220,9 @@ a {
 .template-title h3 {
     font-size: 1.4rem;
     font-weight: 600;
-    color: #6A2C70; /* Roxo principal */
+    color: #6A2C70;
 }
 
-/* Grid de produtos */
 .templates-grid {
     display: flex;
     flex-direction: column;
@@ -237,35 +230,33 @@ a {
     margin-top: 15px;
 }
 
-/* Card de produto */
 .template-card {
-    background: #FFFFFF; /* Branco puro */
+    background: #FFFFFF;
     border-radius: 28px;
     padding: 28px 32px;
     display: flex;
     align-items: flex-start;
     gap: 30px;
-    border: 1px solid #EAEAEA; /* Cinza claro */
-    box-shadow: 0 8px 20px rgba(106, 44, 112, 0.05); /* Roxo com transparência */
+    border: 1px solid #EAEAEA;
+    box-shadow: 0 8px 20px rgba(106, 44, 112, 0.05);
     transition: all 0.2s;
 }
 
 .template-card:hover {
-    border-color: #F6A5C0; /* Rosa claro */
-    box-shadow: 0 15px 30px -12px rgba(232, 106, 146, 0.2); /* Rosa com transparência */
+    border-color: #F6A5C0;
+    box-shadow: 0 15px 30px -12px rgba(232, 106, 146, 0.2);
 }
 
-/* Campo de imagem */
 .product-image {
     width: 110px;
     height: 110px;
-    background:#FFFFFF; /* Rosa claro */
+    background: #FFFFFF;
     border-radius: 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px dashed #E86A92; /* Rosa principal */
-    color: #6A2C70; /* Roxo principal */
+    border: 2px dashed #E86A92;
+    color: #6A2C70;
     font-size: 0.9rem;
     font-weight: 500;
     text-align: center;
@@ -280,9 +271,6 @@ a {
     gap: 8px;
 }
 
-
-
-/* Área de informações */
 .template-info {
     flex: 1;
     display: flex;
@@ -290,7 +278,6 @@ a {
     gap: 16px;
 }
 
-/* Campos do template */
 .template-field {
     display: flex;
     flex-direction: column;
@@ -300,26 +287,25 @@ a {
 .field-label {
     font-size: 0.85rem;
     font-weight: 600;
-    color: #E86A92; /* Rosa principal */
+    color: #E86A92;
     letter-spacing: 0.3px;
     text-transform: uppercase;
 }
 
 .field-placeholder {
-    background: #FFF7FB; /* Fundo claro principal */
-    border: 1px solid #EAEAEA; /* Cinza claro */
+    background: #FFF7FB;
+    border: 1px solid #EAEAEA;
     border-radius: 14px;
     padding: 14px 18px;
-    color: #4A4A4A; /* Cinza texto */
+    color: #4A4A4A;
     font-size: 1rem;
 }
 
 .field-placeholder span {
-    color: #F6A5C0; /* Rosa claro */
+    color: #F6A5C0;
     font-style: italic;
 }
 
-/* Linha de duas colunas */
 .row-fields {
     display: flex;
     gap: 20px;
@@ -331,7 +317,6 @@ a {
     min-width: 200px;
 }
 
-/* Ações */
 .template-actions {
     display: flex;
     gap: 12px;
@@ -341,61 +326,59 @@ a {
 }
 
 .btn-action {
-    background: #FFFFFF; /* Branco puro */
-    border: 1px solid #EAEAEA; /* Cinza claro */
+    background: #FFFFFF;
+    border: 1px solid #EAEAEA;
     padding: 12px 28px;
     border-radius: 40px;
     font-weight: 600;
     font-size: 1rem;
-    color: #4A4A4A; /* Cinza texto */
+    color: #4A4A4A;
     cursor: pointer;
     transition: 0.1s;
     letter-spacing: 0.3px;
 }
 
 .btn-action.edit {
-    background: #FFF7FB; /* Fundo claro principal */
-    border-color: #F6A5C0; /* Rosa claro */
-    color: #6A2C70; /* Roxo principal */
+    background: #FFF7FB;
+    border-color: #F6A5C0;
+    color: #6A2C70;
 }
 
 .btn-action.delete {
-    background: #FFF7FB; /* Fundo claro principal */
-    border-color: #E86A92; /* Rosa principal */
-    color: #E86A92; /* Rosa principal */
+    background: #FFF7FB;
+    border-color: #E86A92;
+    color: #E86A92;
 }
 
 .btn-action.edit:hover {
-    background: #F6A5C0; /* Rosa claro */
-    border-color: #F6A5C0; /* Rosa claro */
-    color: #6A2C70; /* Roxo principal */
+    background: #F6A5C0;
+    border-color: #F6A5C0;
+    color: #6A2C70;
 }
 
 .btn-action.delete:hover {
-    background: #E86A92; /* Rosa principal */
-    border-color: #E86A92; /* Rosa principal */
-    color: #FFFFFF; /* Branco puro */
+    background: #E86A92;
+    border-color: #E86A92;
+    color: #FFFFFF;
 }
 
-/* Scrollbar */
 .main-content::-webkit-scrollbar {
     width: 8px;
 }
 
 .main-content::-webkit-scrollbar-track {
-    background: #FFF7FB; /* Fundo claro principal */
+    background: #FFF7FB;
 }
 
 .main-content::-webkit-scrollbar-thumb {
-    background: #F6A5C0; /* Rosa claro */
+    background: #F6A5C0;
     border-radius: 10px;
 }
 
 .main-content::-webkit-scrollbar-thumb:hover {
-    background: #E86A92; /* Rosa principal */
+    background: #E86A92;
 }
 
-/* Responsividade */
 @media (max-width: 1000px) {
     .template-card {
         flex-direction: column;

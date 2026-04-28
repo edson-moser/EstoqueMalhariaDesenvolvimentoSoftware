@@ -11,7 +11,6 @@ body {
     background-color: #F5F2F7;
 }
 
-/* CENTRALIZAÇÃO */
 .container {
     display: flex;
     justify-content: center;
@@ -19,7 +18,6 @@ body {
     height: 100vh;
 }
 
-/* CARD */
 .content {
     display: flex;
     width: 900px;
@@ -30,7 +28,6 @@ body {
     position: relative;
 }
 
-/* FUNDO ROXO */
 .content::before {
     content: "";
     position: absolute;
@@ -41,7 +38,6 @@ body {
     left: 0;
 }
 
-/* COLUNAS */
 .first-column,
 .second-column {
     display: flex;
@@ -50,7 +46,6 @@ body {
     align-items: center;
 }
 
-/* ESQUERDA */
 .first-column {
     width: 40%;
     z-index: 2;
@@ -59,7 +54,6 @@ body {
     padding: 40px 20px;
 }
 
-/* DIREITA */
 .second-column {
     width: 60%;
     background: #FAFAFA;
@@ -67,13 +61,11 @@ body {
     padding: 40px;
 }
 
-/* LOGO */
 .logo {
     width: 250px;
     margin-bottom: 25px;
 }
 
-/* TEXTOS */
 .title {
     font-size: 26px;
     font-family: 'Alegreya Sans SC', sans-serif;
@@ -103,7 +95,6 @@ body {
     margin-bottom: 20px;
 }
 
-/* FORM */
 .form {
     width: 80%;
     max-width: 350px;
@@ -111,7 +102,6 @@ body {
     flex-direction: column;
 }
 
-/* INPUT */
 .label-input {
     display: flex;
     align-items: center;
@@ -144,7 +134,6 @@ body {
     font-size: 15px;
 }
 
-/* LINK */
 .password {
     text-align: center;
     margin: 10px 0;
@@ -157,7 +146,6 @@ body {
     color: #6A2C70;
 }
 
-/* BOTÕES */
 .btn {
     padding: 12px;
     border-radius: 8px;
@@ -169,7 +157,6 @@ body {
     margin-top: 10px;
 }
 
-/* BOTÃO ESQUERDA */
 .btn-primary {
     background: transparent;
     border: 2px solid #fff;
@@ -181,7 +168,6 @@ body {
     color: #6A2C70;
 }
 
-/* BOTÃO LOGIN */
 .btn-second {
     background: linear-gradient(135deg, #E86A92, #D85A85);
     color: #fff;
@@ -190,14 +176,11 @@ body {
     margin: 10px auto;
 }
 
-
 .btn-second:hover {
     background: linear-gradient(135deg, #F6A5C0, #E86A92);
 }
 
-/* RESPONSIVO */
 @media (max-width: 900px) {
-
     .content {
         flex-direction: column;
         width: 100%;
