@@ -1,10 +1,13 @@
 <?php
+session_start();
 include("conexao.php");
 
-// SIMULAÇÃO DE USUÁRIO LOGADO
-$malharia_id = 1;
+if(!isset($_SESSION['malharia_id'])){
+    header("Location: login.php");
+    exit;
+}
+$malharia_id = $_SESSION['malharia_id'];
 
-// SALVAR (INSERT OU UPDATE)
 if(isset($_POST['salvar'])){
     $id = $_POST['id'];
     $nome = $_POST['nome_produto'];
@@ -34,7 +37,7 @@ if(isset($_POST['salvar'])){
     header("Location: TelaEstoque.php");
 }
 
-// CARREGAR PARA EDIÇÃO
+
 $id = "";
 $nome = "";
 $descricao = "";
@@ -68,13 +71,13 @@ if(isset($_GET['id'])){
 
 <div class="cadastro-container">
 
-    <!-- Cabeçalho -->
+
     <div class="cadastro-header">
         <h1>Cadastro/Edição de Produto</h1>
         
     </div>
 
-    <!-- Card -->
+   
     <div class="form-card">
 
         <div class="form-title">
@@ -86,7 +89,7 @@ if(isset($_GET['id'])){
 
             <input type="hidden" name="id" value="<?= $id ?>">
 
-            <!-- GRID -->
+      
             <div class="form-grid">
 
                 <div class="form-group">
@@ -95,7 +98,7 @@ if(isset($_GET['id'])){
                 </div>
 
                 <div class="form-group">
-                    <label>Quantidade <span class="required">*</span></label>
+                    <label>Quantidade Atual <span class="required">*</span></label>
                     <input class="form-input" type="number" name="quantidade" value="<?= $quantidade ?>" required>
                 </div>
 

@@ -1,16 +1,20 @@
 <?php
+session_start();
 include("conexao.php");
 
-$malharia_id = 1;
+if(!isset($_SESSION['malharia_id'])){
+    header("Location: login.php");
+    exit;
+}
+$malharia_id = $_SESSION['malharia_id'];
 
-// EXCLUIR
 if(isset($_GET['excluir'])){
     $id = $_GET['excluir'];
     $conecta->query("DELETE FROM estoque WHERE id=$id AND malharia_id=$malharia_id");
     header("Location: TelaEstoque.php");
 }
 
-// BUSCA AJAX
+
 $busca = isset($_GET['busca']) ? $_GET['busca'] : "";
 
 $sql = "SELECT * FROM estoque 
@@ -22,7 +26,7 @@ if($busca != ""){
 
 $result = $conecta->query($sql);
 
-// SE FOR REQUISIÇÃO AJAX, RETORNA SÓ OS CARDS
+
 if(isset($_GET['ajax'])){
     while($row = $result->fetch_assoc()) {
 
@@ -84,7 +88,7 @@ if(isset($_GET['ajax'])){
 </head>
 <body>
     <div class="app-wrapper">
-        <!-- SIDEBAR (MESMA DA TELA DE ESTOQUE) -->
+        
         <div class="sidebar">
             <div class="logo-area">
 
@@ -109,7 +113,7 @@ if(isset($_GET['ajax'])){
 
     <div class="search-section">
 
-        <!-- 🔍 PESQUISA EM TEMPO REAL -->
+ 
         <div class="search-container">
             <span>🔍</span>
             <input 
@@ -149,7 +153,7 @@ if(isset($_GET['ajax'])){
 
         <div class="row-fields">
             <div class="template-field">
-                <div class="field-label">Quantidade</div>
+                <div class="field-label">Quantidade Atual</div>
                 <div class="field-placeholder"><?= $row['quantidade'] ?></div>
             </div>
 
