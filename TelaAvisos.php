@@ -18,7 +18,7 @@
             </div>
             <div class="menu-side">
                 <div class="menu-item-side"><a href="TelaEstoque.php">Estoque</a></div>
-                <div class="menu-item-side active"><a href="TelaAvisos.php">Avisos</a></div>
+                <div class="menu-item-side"><a href="TelaAvisos.php">Avisos</a></div>
                 <div class="menu-item-side"><a href=""> Histórico</a></div>
                 <div class="menu-item-side">Sair</div>
             </div>

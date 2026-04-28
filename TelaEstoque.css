@@ -199,8 +199,11 @@ body {
     white-space: nowrap;
     border: 1px solid #E86A92; /* Rosa principal */
     transition: background 0.2s;
+    
 }
-
+a {
+    text-decoration: none;
+}
 .btn-add:hover {
     background: #F6A5C0; /* Rosa claro */
     border-color: #F6A5C0; /* Rosa claro */
