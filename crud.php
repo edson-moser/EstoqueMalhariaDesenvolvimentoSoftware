@@ -1,127 +1,136 @@
+<?php
+include("conexao.php");
+
+// SIMULAÇÃO DE USUÁRIO LOGADO
+$malharia_id = 1;
+
+// SALVAR (INSERT OU UPDATE)
+if(isset($_POST['salvar'])){
+    $id = $_POST['id'];
+    $nome = $_POST['nome_produto'];
+    $descricao = $_POST['descricao'];
+    $quantidade = $_POST['quantidade'];
+    $quantidade_minima = $_POST['quantidade_minima'];
+    $observacoes = $_POST['observacoes'];
+
+    if($id == ""){
+       
+        $sql = "INSERT INTO estoque 
+        (nome_produto, descricao, quantidade, quantidade_minima, observacoes, malharia_id)
+        VALUES 
+        ('$nome', '$descricao', '$quantidade', '$quantidade_minima', '$observacoes', '$malharia_id')";
+    } else {
+        
+        $sql = "UPDATE estoque SET
+            nome_produto='$nome',
+            descricao='$descricao',
+            quantidade='$quantidade',
+            quantidade_minima='$quantidade_minima',
+            observacoes='$observacoes'
+            WHERE id=$id AND malharia_id=$malharia_id";
+    }
+
+    $conecta->query($sql);
+    header("Location: TelaEstoque.php");
+}
+
+// CARREGAR PARA EDIÇÃO
+$id = "";
+$nome = "";
+$descricao = "";
+$quantidade = "";
+$quantidade_minima = "";
+$observacoes = "";
+
+if(isset($_GET['id'])){
+    $id = $_GET['id'];
+
+    $result = $conecta->query("SELECT * FROM estoque WHERE id=$id AND malharia_id=$malharia_id");
+    $row = $result->fetch_assoc();
+
+    if($row){
+        $nome = $row['nome_produto'];
+        $descricao = $row['descricao'];
+        $quantidade = $row['quantidade'];
+        $quantidade_minima = $row['quantidade_minima'];
+        $observacoes = $row['observacoes'];
+    }
+}
+?>
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ilka Reblin · Cadastro de Produto</title>
-   <link rel="stylesheet" href="crud.css" />
+    <title>Cadastro de Produto</title>
+    <link rel="stylesheet" href="crud.css">
 </head>
 <body>
 
-        <!-- Card de cadastro -->
-        <div class="form-card">
-            <div class="form-title">
-                
-                <h2>Cadastrar/Editar Produto</h2>
+<div class="cadastro-container">
+
+    <!-- Cabeçalho -->
+    <div class="cadastro-header">
+        <h1>Cadastro/Edição de Produto</h1>
+        
+    </div>
+
+    <!-- Card -->
+    <div class="form-card">
+
+        <div class="form-title">
+            
+            <h2>Dados do Produto</h2>
+        </div>
+
+        <form method="POST">
+
+            <input type="hidden" name="id" value="<?= $id ?>">
+
+            <!-- GRID -->
+            <div class="form-grid">
+
+                <div class="form-group">
+                    <label>Nome <span class="required">*</span></label>
+                    <input class="form-input" type="text" name="nome_produto" value="<?= $nome ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade <span class="required">*</span></label>
+                    <input class="form-input" type="number" name="quantidade" value="<?= $quantidade ?>" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Quantidade mínima</label>
+                    <input class="form-input" type="number" name="quantidade_minima" value="<?= $quantidade_minima ?>">
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Descrição</label>
+                    <textarea class="form-textarea" name="descricao"><?= $descricao ?></textarea>
+                </div>
+
+                <div class="form-group full-width">
+                    <label>Observações</label>
+                    <textarea class="form-textarea" name="observacoes"><?= $observacoes ?></textarea>
+                </div>
+
             </div>
 
-            <form>
-                <!-- SEÇÃO DE IMAGEM -->
-                <div class="form-section">
-                    <div class="section-title">
-                        
-                        <h3>Imagem do Produto</h3>
-                    </div>
-                    <div class="image-upload-area">
-                        <div class="image-preview">
-                            <div class="preview-placeholder">
-                               
-                                <span>Pré-visualização</span>
-                            </div>
-                        </div>
-                        <div class="upload-controls">
-                            <button type="button" class="btn-select-image">
-                               
-                                Selecionar Imagem
-                            </button>
-                            
-                        </div>
-                    </div>
-                </div>
+            <!-- BOTÕES -->
+            <div class="form-actions">
+                <a href="TelaEstoque.php">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                </a>
 
-                <!-- SEÇÃO DE INFORMAÇÕES BÁSICAS -->
-                <div class="form-section">
-                    <div class="section-title">
-                        
-                        <h3>Informações Básicas</h3>
-                    </div>
-                    <div class="form-grid">
-                        <!-- Nome do Produto -->
-                        <div class="form-group full-width">
-                            <label>
-                                
-                                Nome do Produto <span class="required">*</span>
-                            </label>
-                            <input type="text" class="form-input" 
-                                   placeholder="Ex: Camiseta Básica, Moletom, Calça..." required>
-                        </div>
+                <button type="submit" name="salvar" class="btn-save">
+                     Salvar Produto
+                </button>
+            </div>
 
-                        <!-- Descrição -->
-                        <div class="form-group full-width">
-                            <label>
-                                
-                                Descrição
-                            </label>
-                            <textarea class="form-textarea" 
-                                      placeholder="Ex: Algodão 100%, várias cores, tam. P ao GG" 
-                                      rows="3"></textarea>
-                        </div>
-                    </div>
-                </div>
+        </form>
 
-                <!-- SEÇÃO DE ESTOQUE -->
-                <div class="form-section">
-                    <div class="section-title">
-                        
-                        <h3>Controle de Estoque</h3>
-                    </div>
-                    <div class="form-grid">
-                        <!-- Quantidade -->
-                        <div class="form-group">
-                            <label>
-                                
-                                Quantidade <span class="required">*</span>
-                            </label>
-                            <input type="number" class="form-input" 
-                                   placeholder="Ex: 45" min="0" step="1" required>
-                        </div>
-
-                        <!-- Quantidade Mínima -->
-                        <div class="form-group">
-                            <label>
-                                
-                                Quantidade Mínima <span class="required">*</span>
-                            </label>
-                            <input type="number" class="form-input" 
-                                   placeholder="Ex: 10" min="0" step="1" required>
-                            <small class="field-hint">Quando o estoque atingir este valor, um aviso será gerado</small>
-                        </div>
-
-                        <!-- Observação -->
-                        <div class="form-group full-width">
-                            <label>
-                                
-                                Observação
-                            </label>
-                            <input type="text" class="form-input" 
-                                   placeholder="Ex: Nova coleção, em promoção, aguardando reposição...">
-                        </div>
-                    </div>
-                </div>
-
-                <!-- BOTÕES -->
-                <div class="form-actions">
-                    <button type="button" class="btn-cancel">
-                        
-                        Cancelar
-                    </button>
-                    <button type="submit" class="btn-save">
-                        
-                        Salvar Produto
-                    </button>
-                </div>
-            </form>
-        </div>
     </div>
+</div>
+
 </body>
 </html>

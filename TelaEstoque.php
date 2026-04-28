@@ -1,17 +1,90 @@
+<?php
+include("conexao.php");
+
+$malharia_id = 1;
+
+// EXCLUIR
+if(isset($_GET['excluir'])){
+    $id = $_GET['excluir'];
+    $conecta->query("DELETE FROM estoque WHERE id=$id AND malharia_id=$malharia_id");
+    header("Location: TelaEstoque.php");
+}
+
+// BUSCA AJAX
+$busca = isset($_GET['busca']) ? $_GET['busca'] : "";
+
+$sql = "SELECT * FROM estoque 
+        WHERE malharia_id=$malharia_id";
+
+if($busca != ""){
+    $sql .= " AND (nome_produto LIKE '%$busca%' OR descricao LIKE '%$busca%')";
+}
+
+$result = $conecta->query($sql);
+
+// SE FOR REQUISIÇÃO AJAX, RETORNA SÓ OS CARDS
+if(isset($_GET['ajax'])){
+    while($row = $result->fetch_assoc()) {
+
+        $baixo = ($row['quantidade'] <= $row['quantidade_minima']) ? true : false;
+
+        echo "<div class='template-card' ".($baixo ? "style='border:2px solid red;'" : "").">";
+
+        echo "<div class='template-info'>";
+
+        echo "<div class='template-field'>
+                <div class='field-label'>Nome</div>
+                <div class='field-placeholder'>{$row['nome_produto']}</div>
+              </div>";
+
+        echo "<div class='template-field'>
+                <div class='field-label'>Descrição</div>
+                <div class='field-placeholder'>{$row['descricao']}</div>
+              </div>";
+
+        echo "<div class='row-fields'>
+                <div class='template-field'>
+                    <div class='field-label'>Quantidade</div>
+                    <div class='field-placeholder'>{$row['quantidade']}</div>
+                </div>
+
+                <div class='template-field'>
+                    <div class='field-label'>Mínimo</div>
+                    <div class='field-placeholder'>{$row['quantidade_minima']}</div>
+                </div>
+              </div>";
+
+        if($baixo){
+            echo "<div style='color:red; font-weight:bold;'>⚠ Estoque baixo!</div>";
+        }
+
+        echo "</div>";
+
+        echo "<div class='template-actions'>
+                <a href='crud.php?id={$row['id']}'>
+                    <button class='btn-action edit'>Editar</button>
+                </a>
+
+                <a href='TelaEstoque.php?excluir={$row['id']}'>
+                    <button class='btn-action delete'>Excluir</button>
+                </a>
+              </div>";
+
+        echo "</div>";
+    }
+    exit;
+}
+?>
 <!DOCTYPE html>
-<html lang="pt-BR">
-
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Malharia System · Template de Produto</title>
-    <link rel="stylesheet" href="TelaEstoque.css" />
-
+<meta charset="UTF-8">
+<title>Estoque</title>
+<link rel="stylesheet" href="TelaEstoque.css">
 </head>
-
 <body>
     <div class="app-wrapper">
-        <!-- SIDEBAR -->
+        <!-- SIDEBAR (MESMA DA TELA DE ESTOQUE) -->
         <div class="sidebar">
             <div class="logo-area">
 
@@ -20,102 +93,114 @@
             </div>
             <div class="menu-side">
                 <div class="menu-item-side"><a href="TelaEstoque.php">Estoque</a></div>
-                <div class="menu-item-side"><a href="TelaAvisos.php">Avisos</a></div>
-                <div class="menu-item-side"><a href="">Histórico</a></div>
-                <div class="menu-item-side"><a href="logout.php">Sair</a></div>
-                
+                <div class="menu-item-side active"><a href="TelaAvisos.php">Avisos</a></div>
+                <div class="menu-item-side"><a href=""> Histórico</a></div>
+                <div class="menu-item-side">Sair</div>
+            </div>
+        </div>
+<div class="app-wrapper">
+
+
+
+<div class="main-content">
+
+<div class="content-header">
+    <h2>Estoque</h2>
+
+    <div class="search-section">
+
+        <!-- 🔍 PESQUISA EM TEMPO REAL -->
+        <div class="search-container">
+            <span>🔍</span>
+            <input 
+                type="text" 
+                id="busca"
+                placeholder="Pesquisar produto..."
+                onkeyup="buscarProduto()"
+            >
+        </div>
+
+        <a href="crud.php">
+            <button class="btn-add">+ Novo Produto</button>
+        </a>
+
+    </div>
+</div>
+
+<div class="templates-grid" id="listaProdutos">
+
+<?php while($row = $result->fetch_assoc()) { 
+    $baixo = ($row['quantidade'] <= $row['quantidade_minima']);
+?>
+
+<div class="template-card" <?= $baixo ? "style='border:2px solid red;'" : "" ?>>
+
+    <div class="template-info">
+
+        <div class="template-field">
+            <div class="field-label">Nome</div>
+            <div class="field-placeholder"><?= $row['nome_produto'] ?></div>
+        </div>
+
+        <div class="template-field">
+            <div class="field-label">Descrição</div>
+            <div class="field-placeholder"><?= $row['descricao'] ?></div>
+        </div>
+
+        <div class="row-fields">
+            <div class="template-field">
+                <div class="field-label">Quantidade</div>
+                <div class="field-placeholder"><?= $row['quantidade'] ?></div>
+            </div>
+
+            <div class="template-field">
+                <div class="field-label">Mínimo</div>
+                <div class="field-placeholder"><?= $row['quantidade_minima'] ?></div>
             </div>
         </div>
 
-        <!-- CONTEÚDO PRINCIPAL -->
-        <div class="main-content">
-            <div class="content-header">
-                <h2>Controle de Estoque</h2>
+        <?php if($baixo){ ?>
+            <div style="color:red; font-weight:bold;">⚠ Estoque baixo!</div>
+        <?php } ?>
 
-                <div class="search-section">
-                    <div class="search-container">
-                        <span>🔍</span>
-                        <input type="text" placeholder="Pesquisar produtos..." value="Pesquisar produtos...">
-                    </div>
-                    <button class="btn-add">
-                        <span>+</span> Adicionar Novo Produto
-                    </button>
-                </div>
-            </div>
-
-            <!-- Área de produtos em estoque -->
-            <div class="template-title">
-                <h3>PRODUTOS EM ESTOQUE:</h3>
-            </div>
-
-            <div class="templates-grid">
-                <!-- CARD MODELO (BASE) - com imagem, quantidade, descrição e observações -->
-                <div class="template-card">
-                    <!-- Imagem do produto -->
-                    <div class="product-image">
-                        <span>Imagem<br>do Produto</span>
-                    </div>
-
-                    <!-- Informações do template -->
-                    <div class="template-info">
-                        <!-- Campo NOME -->
-                        <div class="template-field">
-                            <div class="field-label">Nome do Produto</div>
-                            <div class="field-placeholder">
-                                <span>Ex: Camiseta Básica, Moletom, Calça...</span>
-                            </div>
-                        </div>
-
-                        <!-- Campo DESCRIÇÃO -->
-                        <div class="template-field">
-                            <div class="field-label">Descrição</div>
-                            <div class="field-placeholder">
-                                <span>Ex: Algodão 100%, várias cores, tam. P ao GG</span>
-                            </div>
-                        </div>
-
-                        <!-- Linha com QUANTIDADE e OBSERVAÇÕES lado a lado -->
-                        <div class="row-fields">
-                            <!-- Quantidade -->
-                            <div class="template-field">
-                                <div class="field-label">Quantidade</div>
-                                <div class="field-placeholder">
-                                    <span>Ex: 45 unidades</span>
-                                </div>
-                            </div>
-
-                            <!-- Observações -->
-                            <div class="template-field">
-                                <div class="field-label">Observações</div>
-                                <div class="field-placeholder">
-                                    <span>Ex: Nova coleção, em promoção, aguardando reposição...</span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Ações (editar/excluir) -->
-                    <div class="template-actions">
-                        <span class="btn-action edit">[Edit]</span>
-                        <span class="btn-action delete">[Excluir]</span>
-                    </div>
-                </div>
-            </div>
-        </div>
     </div>
 
-    <!-- Script para o campo de pesquisa -->
-    <script>
-        const searchField = document.querySelector('.search-container input');
-        if (searchField) {
-            searchField.addEventListener('focus', function () {
-                if (this.value === 'Pesquisar produtos...') this.value = '';
-            });
-            searchField.addEventListener('blur', function () {
-                if (this.value.trim() === '') this.value = 'Pesquisar produtos...';
-            });
-        }
-    </script>
-</body>
+    <div class="template-actions">
+        <a href="crud.php?id=<?= $row['id'] ?>">
+            <button class="btn-action edit">Editar</button>
+        </a>
 
+        <a href="TelaEstoque.php?excluir=<?= $row['id'] ?>">
+            <button class="btn-action delete">Excluir</button>
+        </a>
+    </div>
+
+</div>
+
+<?php } ?>
+
+</div>
+
+</div>
+</div>
+
+
+<script>
+function buscarProduto(){
+    let busca = document.getElementById("busca").value;
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("GET", "TelaEstoque.php?ajax=1&busca=" + busca, true);
+
+    xhr.onload = function(){
+        if(xhr.status == 200){
+            document.getElementById("listaProdutos").innerHTML = xhr.responseText;
+        }
+    }
+
+    xhr.send();
+}
+</script>
+
+</body>
 </html>
