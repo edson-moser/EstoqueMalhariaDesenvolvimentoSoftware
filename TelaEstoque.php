@@ -59,10 +59,6 @@ if (isset($_GET['ajax'])) {
                 </div>
               </div>";
 
-        if ($baixo) {
-            echo "<div style='color:red; font-weight:bold;'>⚠ Estoque baixo!</div>";
-        }
-
         echo "</div>";
 
         echo "<div class='template-actions'>
@@ -167,10 +163,6 @@ if (isset($_GET['ajax'])) {
                                         <div class="field-placeholder"><?= $row['quantidade_minima'] ?></div>
                                     </div>
                                 </div>
-
-                                <?php if ($baixo) { ?>
-                                    <div style="color:red; font-weight:bold;">⚠ Estoque baixo!</div>
-                                <?php } ?>
 
                             </div>
 
