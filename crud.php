@@ -21,7 +21,6 @@ if (isset($_POST['salvar'])) {
 
     $nome_imagem = "";
 
-
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
 
         $arquivo = $_FILES['imagem'];
@@ -32,39 +31,63 @@ if (isset($_POST['salvar'])) {
 
     if ($id == "") {
         $sql = "INSERT INTO estoque
-(nome_produto, descricao, quantidade, quantidade_minima, observacoes, nome_imagem, data_atualizacao, malharia_id)
-VALUES
-('$nome', '$descricao', '$quantidade', '$quantidade_minima', '$observacoes', '$nome_imagem', '$data_atualizacao', '$malharia_id')";
+        (nome_produto, descricao, quantidade, quantidade_minima, observacoes, nome_imagem, data_atualizacao, malharia_id)
+        VALUES
+        ('$nome', '$descricao', '$quantidade', '$quantidade_minima', '$observacoes', '$nome_imagem', '$data_atualizacao', '$malharia_id')";
+        
+        $conecta->query($sql);
+        $novo_id = $conecta->insert_id;
+        
+        // Registrar movimentação de entrada (cadastro inicial)
+        $sql_mov = "INSERT INTO movimentacao_estoque (estoque_id, malharia_id, tipo_movimento, quantidade, data_movimento, observacao)
+                    VALUES ($novo_id, $malharia_id, 'entrada', $quantidade, '$data_atualizacao', 'Cadastro inicial do produto')";
+        $conecta->query($sql_mov);
+        
     } else {
+        // Verificar quantidade anterior antes de atualizar
+        $sql_anterior = "SELECT quantidade FROM estoque WHERE id = $id AND malharia_id = $malharia_id";
+        $result_anterior = $conecta->query($sql_anterior);
+        $row_anterior = $result_anterior->fetch_assoc();
+        $qtd_anterior = $row_anterior['quantidade'];
 
         if ($nome_imagem != "") {
-
             $sql = "UPDATE estoque SET
-        nome_produto='$nome',
-        descricao='$descricao',
-        quantidade='$quantidade',
-        quantidade_minima='$quantidade_minima',
-        observacoes='$observacoes',
-        nome_imagem='$nome_imagem',
-        data_atualizacao='$data_atualizacao'
-        WHERE id=$id AND malharia_id=$malharia_id";
+            nome_produto='$nome',
+            descricao='$descricao',
+            quantidade='$quantidade',
+            quantidade_minima='$quantidade_minima',
+            observacoes='$observacoes',
+            nome_imagem='$nome_imagem',
+            data_atualizacao='$data_atualizacao'
+            WHERE id=$id AND malharia_id=$malharia_id";
         } else {
-
             $sql = "UPDATE estoque SET
-        nome_produto='$nome',
-        descricao='$descricao',
-        quantidade='$quantidade',
-        quantidade_minima='$quantidade_minima',
-        observacoes='$observacoes',
-        data_atualizacao='$data_atualizacao'
-        WHERE id=$id AND malharia_id=$malharia_id";
+            nome_produto='$nome',
+            descricao='$descricao',
+            quantidade='$quantidade',
+            quantidade_minima='$quantidade_minima',
+            observacoes='$observacoes',
+            data_atualizacao='$data_atualizacao'
+            WHERE id=$id AND malharia_id=$malharia_id";
+        }
+        
+        $conecta->query($sql);
+        
+        // Registrar movimentação se houve alteração na quantidade
+        if ($qtd_anterior != $quantidade) {
+            $diferenca = $quantidade - $qtd_anterior;
+            $tipo = ($diferenca > 0) ? 'entrada' : 'saida';
+            $qtd_abs = abs($diferenca);
+            $obs = ($tipo == 'entrada') ? 'Reposição de estoque' : 'Utilização de estoque';
+            
+            $sql_mov = "INSERT INTO movimentacao_estoque (estoque_id, malharia_id, tipo_movimento, quantidade, data_movimento, observacao)
+                        VALUES ($id, $malharia_id, '$tipo', $qtd_abs, '$data_atualizacao', '$obs')";
+            $conecta->query($sql_mov);
         }
     }
 
-    $conecta->query($sql);
     header("Location: TelaEstoque.php");
 }
-
 
 $id = "";
 $nome = "";
@@ -103,24 +126,20 @@ if (isset($_GET['id'])) {
 
     <div class="cadastro-container">
 
-
         <div class="cadastro-header">
             <h1>Cadastro de Produto</h1>
             <p>Gerencie os itens do seu estoque</p>
         </div>
 
-
         <div class="form-card">
 
             <div class="form-title">
-
                 <h2>Produto</h2>
             </div>
 
             <form method="POST" enctype="multipart/form-data">
 
                 <input type="hidden" name="id" value="<?= $id ?>">
-
 
                 <div class="form-grid">
 
@@ -140,7 +159,6 @@ if (isset($_GET['id'])) {
                             value="<?= $quantidade_minima ?>">
                     </div>
 
-
                     <div class="form-group full-width">
                         <label>Imagem do Produto</label>
 
@@ -158,7 +176,6 @@ if (isset($_GET['id'])) {
 
                             <div class="upload-controls">
                                 <input type="file" name="imagem" class="form-input">
-
                             </div>
 
                         </div>
@@ -175,7 +192,6 @@ if (isset($_GET['id'])) {
                     </div>
 
                 </div>
-
 
                 <div class="form-actions">
 

@@ -25,14 +25,12 @@ require 'loginCadastro.php';
             </p>
         </div>
 
-        <!-- Lado direito -->
         <div class="second-column">
             <h2 class="title title-second">Faça o login</h2>
             <p class="description description-second">
                 Insira o login e sua senha:
             </p>
 
-            <!-- Mensagem de erro -->
             <?php if (isset($erro)) { ?>
                 <p style="color:red;"><?php echo $erro; ?></p>
             <?php } ?>

@@ -97,7 +97,7 @@ if (isset($_GET['ajax'])) {
             <div class="menu-side">
                 <div class="menu-item-side"><a href="TelaEstoque.php">Estoque</a></div>
                 <div class="menu-item-side"><a href="TelaAvisos.php">Avisos</a></div>
-                <div class="menu-item-side"><a href="">Histórico</a></div>
+                <div class="menu-item-side"><a href="historico.php">Histórico</a></div>
                 <div class="menu-item-side"><a href="logout.php">Sair</a></div>
             </div>
         </div>

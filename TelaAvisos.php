@@ -1,10 +1,7 @@
 <?php
 include("conexao.php");
-
-// Simulação de usuário logado
 $malharia_id = 1;
 
-// Buscar produtos com estoque baixo
 $sql = "SELECT * FROM estoque 
         WHERE quantidade <= quantidade_minima 
         AND malharia_id = $malharia_id";
@@ -25,8 +22,6 @@ $totalAvisos = $result->num_rows;
 <body>
 
     <div class="app-wrapper">
-
-        <!-- SIDEBAR -->
         <div class="sidebar">
             <div class="logo-area">
                 <img src="LOGO-ILKA-REBLIN-TRANSPARENTE.png">
@@ -34,13 +29,12 @@ $totalAvisos = $result->num_rows;
 
             <div class="menu-side">
                 <div class="menu-item-side"><a href="TelaEstoque.php">Estoque</a></div>
-                <div class="menu-item-side active"><a href="#">Avisos</a></div>
-                <div class="menu-item-side"><a href="#">Histórico</a></div>
+                <div class="menu-item-side active"><a href="TelaAvisos.php">Avisos</a></div>
+                <div class="menu-item-side"><a href="historico.php">Histórico</a></div>
                 <div class="menu-item-side"><a href="logout.php">Sair</a></div>
             </div>
         </div>
 
-        <!-- CONTEÚDO -->
         <div class="main-content">
 
             <div class="avisos-title">
@@ -63,7 +57,6 @@ $totalAvisos = $result->num_rows;
                         $imagem = $row['nome_imagem'];
                         $id = $row['id'];
 
-                        // Lógica de urgência
                         if ($quantidade <= ($minimo / 2)) {
                             $urgencia = "crítico";
                             $cor = "#b91c1c";
@@ -83,7 +76,7 @@ $totalAvisos = $result->num_rows;
                                 <?php if (!empty($imagem)) { ?>
                                     <img src="imagens/<?php echo $imagem; ?>" alt="<?php echo $nome; ?>">
                                 <?php } else { ?>
-                                    📦
+                                    
                                 <?php } ?>
                             </div>
 
